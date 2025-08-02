@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Girlfriend's Day 💐</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="petalsCanvas"></canvas>
+
+    <div class="container">
+      <h1>Happy National Girlfriend Day 💖</h1>
+      <p class="subtext">To the most beautiful flower in my life 🌷</p>
+
+      <div class="message">
+        <h2>I made this just for you 💌</h2>
+        <p>Every petal on this page is a piece of my heart.</p>
+      </div>
+
+      <div class="gift-box" onclick="revealNote()">🎁 Tap the gift</div>
+
+      <div id="flowers-popup">
+        <img
+          src="https://imgur.com/gallery/still-blooming-orchid-07292025-oeb0O8Y#/t/flowers"
+          class="flower"
+        />
+        <img src="https://i.imgur.com/9pt1PC4.png" class="flower" />
+        <img src="https://i.imgur.com/lHqQUZ2.png" class="flower" />
+      </div>
+
+      <div id="note">
+        <p>
+          Happy Girlfriend Day I love You Baby. My Love to You is Always Here
+          Digitally No Matter How Far Away ❤️
+        </p>
+      </div>
+    </div>
+
+    <!-- Optional Music -->
+    <!-- <audio autoplay loop>
+    <source src="your-music-file.mp3" type="audio/mpeg" />
+  </audio> -->
+
+    <script>
+      // Petals falling
+      const canvas = document.getElementById("petalsCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let petals = [];
+      for (let i = 0; i < 50; i++) {
+        petals.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          r: Math.random() * 4 + 2,
+          speed: Math.random() * 1.5 + 0.5,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let petal of petals) {
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(255, 182, 193, 0.7)";
+          ctx.arc(petal.x, petal.y, petal.r, 0, Math.PI * 2);
+          ctx.fill();
+          petal.y += petal.speed;
+          petal.x += Math.sin(petal.y * 0.01);
+          if (petal.y > canvas.height) {
+            petal.y = -10;
+            petal.x = Math.random() * canvas.width;
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+
+      // Reveal love note
+      function revealNote() {
+        document.getElementById("note").style.display = "block";
+      }
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
